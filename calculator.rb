@@ -4,31 +4,30 @@ Shoes.app :title => "My Amazing Calculator", :width => 240, :height => 280 do
     
     flow do
       
-      %w(7 8 9 4 5 6 1 2 3 0 + / * -).each do |op|      
+      %w(7 8 9 4 5 6 1 2 3 0 + / * - C = sqrt).each do |op|      
         button op do         
-          append op
-        end
-      end
-
-      %w(C =).each do |op|
-        button op do
           case op 
             when "C"
               delete_input
             when "="
               eval_expression
+            when "sqrt"
+              square_root
+            else
+              append op
           end
         end
       end
-
-      
-      
     end
     
   end
   
   # Stick a string on the end of our input
   #
+
+  def square_root
+    @output.text = Math.sqrt(@input.to_i)
+  end
 
   def delete_input
     @input = ""
