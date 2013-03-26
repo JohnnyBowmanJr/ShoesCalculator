@@ -3,10 +3,16 @@ Shoes.app :title => "My Amazing Calculator", :width => 240, :height => 280 do
     @output = edit_line
     
     flow do
+      
       %w(7 8 9 4 5 6 1 2 3 0 + / * -).each do |op|      
        button op do         
           append op
         end
+      end
+
+      button "C" do
+        delete_input
+
       end
       
       button "=" do
@@ -19,7 +25,10 @@ Shoes.app :title => "My Amazing Calculator", :width => 240, :height => 280 do
   # Stick a string on the end of our input
   #
 
-
+  def delete_input
+    @input = ""
+    @output.text = @input
+  end
 
   def append(s)
     if @input.nil?
