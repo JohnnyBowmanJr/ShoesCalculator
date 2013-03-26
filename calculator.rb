@@ -5,19 +5,25 @@ Shoes.app :title => "My Amazing Calculator", :width => 240, :height => 280 do
     flow do
       
       %w(7 8 9 4 5 6 1 2 3 0 + / * -).each do |op|      
-    
-      case button
-        when "C"
-          delete_input
-        when "="
-          eval_expression
-        else
+        button op do         
           append op
+        end
       end
-  end
 
+      %w(C =).each do |op|
+        button op do
+          case op 
+            when "C"
+              delete_input
+            when "="
+              eval_expression
+          end
+        end
+      end
 
-        
+      
+      
+    end
     
   end
   
