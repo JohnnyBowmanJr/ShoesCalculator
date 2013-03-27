@@ -1,11 +1,13 @@
 Shoes.app :title => "My Amazing Calculator", :width => 240, :height => 280 do
   stack :margin => 50 do
     @output = edit_line
-    
+    background green
+
     flow do
       
       %w(7 8 9 4 5 6 1 2 3 0 + / * - C = sqrt).each do |op|      
-        button op do         
+        button op do
+          op.to_i      
           case op 
             when "C"
               delete_input
@@ -26,7 +28,9 @@ Shoes.app :title => "My Amazing Calculator", :width => 240, :height => 280 do
   #
 
   def square_root
-    @output.text = Math.sqrt(@input.to_i)
+    @input = Math.sqrt(@input.to_i).to_s
+    @output.text = @input
+
   end
 
   def delete_input
